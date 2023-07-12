@@ -1,64 +1,52 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 Console.WriteLine("Hello, World!");
-
-string test = "ABC";
 Solution solution = new();
-Console.WriteLine(solution.Convert(test, 2));
+Console.WriteLine(solution.Reverse(-10));
 
 public class Solution
 {
-    public string Convert(string s, int numRows)
+    public bool IsPalindrome(int x)
     {
-        string[] arr = new string[numRows];
-        for (int i = 0; i < numRows; i++)
+        if (x<0)
         {
-            arr[i] = "";
+            return false;
         }
 
-        //計算各字元位置
-        int strLen = s.Length;
-        int count = 0;
-        int r = 0;
-        bool bevel = false;
-        while (count < strLen)
+        int res = 0;
+        int temp = x;
+        while (temp>0)
         {
-            arr[r] = $"{arr[r]}{s[count]}";
-            count++;
-            if (count == strLen)
-            {
-                break;
-            }
-
-            if (!bevel && r < numRows)
-            {
-                r++;
-            }
-
-            if (r == numRows)
-            {
-                bevel = true;
-                r -= 1;
-            }
-
-            if (bevel && r > 0)
-            {
-                r--;
-            }
-
-            if (bevel && r == 0)
-            {
-                bevel = false;
-            }
+            res = res*10 + temp%10;
+            temp/=10;
         }
 
-        //整理結果
-        string res = "";
-        for (int i = 0; i < numRows; i++)
+        if (res==x)
         {
-            res = $"{res}{arr[i]}";
+            return true;
         }
-        return res;
+        return false;
+    }
+
+    public int Reverse(int x)
+    {
+        //bool negative = false;
+        //if (x<0)
+        //{
+        //    negative = true;
+        //}
+
+        int res = 0;
+        int temp = x;
+        while (true)
+        {
+            res = res*10 + temp%10;
+            temp/=10;
+            if (temp==0)
+            {
+                return res;
+            }
+        }
     }
 }
 
